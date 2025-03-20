@@ -1,93 +1,79 @@
-Theoretical Framework for Proof-of-Trust Consensus Algorithm
+**Theoretical Framework for Proof-of-Trust Consensus Algorithm**
 
-1. Introduction
+## 1. Introduction
 
 Proof-of-Trust (PoT) is a consensus mechanism where network participants stake their credibility instead of financial assets. Trust in PoT is dynamic—it decays over time without collaboration and is irreversibly lost upon fraudulent behavior. This framework refines the theoretical underpinnings of PoT, ensuring robustness, fairness, and resistance to attacks.
 
-2. Trust Evolution Model
+## 2. Trust Evolution Model
 
-2.1 Initial Trust and Decay
+### 2.1 Initial Trust and Decay
 
-Each node starts with maximal trust .
+- Each node starts with maximal trust \(T_0 = 1.0\).
+- Trust decays exponentially if a node does not actively contribute:
+  $$
+  T_{t+1} = T_t - \delta (1 - \frac{C}{C_{max}})
+  $$
+  where:
+  - \(\delta\) is the trust decay rate.
+  - \(C\) is the node’s contributions.
+  - \(C_{max}\) is the maximum expected contribution.
 
-Trust decays exponentially if a node does not actively contribute:
+### 2.2 Trust Recovery
 
+- Nodes can regain trust through consistent validation and contributions:
+  $$
+  T_{t+1} = T_t + \alpha C
+  $$
+  where \(\alpha\) is the recovery factor.
+- Trust recovery is capped at \(T_{max} = 1.0\) to prevent artificial inflation.
 
+## 3. Attack Resistance
 
-where:
+### 3.1 Sybil Attack Prevention
 
- is the trust decay rate.
+- Unique identity verification ensures that multiple fraudulent nodes cannot be created.
+- New nodes must gain trust organically before participating in validation.
 
- is the node’s contributions.
+### 3.2 Collusion Resistance
 
- is the maximum expected contribution.
+- Peers validate each other based on weighted historical interactions.
+- Majority consensus (\(>51\%\)) required for a node’s validation.
 
-2.2 Trust Recovery
+### 3.3 Long-Range Attack Defense
 
-Nodes can regain trust through consistent validation and contributions:
+- Trust decay prevents dormant attackers from resurfacing after extended periods.
+- Trust cannot be restored once permanently revoked due to fraud.
 
+## 4. Consensus Security Guarantees
 
+### 4.1 Fairness and Byzantine Fault Tolerance
 
-where  is the recovery factor.
+- Trust-weighted validation ensures that nodes with a proven track record have a higher influence.
+- Fault tolerance is preserved as malicious nodes are gradually excluded from consensus.
 
-Trust recovery is capped at  to prevent artificial inflation.
+### 4.2 Peer Validation Model
 
-3. Attack Resistance
+- A transaction is validated if at least \(51\%\) of trusted peers approve.
+- Fraud reports trigger an investigation requiring \(51\%\) consensus for trust revocation.
 
-3.1 Sybil Attack Prevention
+## 5. Incentive Structures & Game Theory
 
-Unique identity verification ensures that multiple fraudulent nodes cannot be created.
+### 5.1 Rewarding Contributions
 
-New nodes must gain trust organically before participating in validation.
+- More effort leads to higher trust and validation privileges.
+- Nodes contributing without immediate returns gain trust exponentially.
 
-3.2 Collusion Resistance
+### 5.2 Penalties for Malicious Behavior
 
-Peers validate each other based on weighted historical interactions.
+- Fraudulent actions lead to an irreversible trust drop to zero.
+- A banned node can only re-enter the network through 51% peer approval, achieved through verifiable contributions.
 
-Majority consensus () required for a node’s validation.
+### 5.3 Preventing Artificial Inflation
 
-3.3 Long-Range Attack Defense
+- Contributions must be verifiable and peer-audited.
+- Automated systems may cross-check anomalies, but peer validation remains primary.
 
-Trust decay prevents dormant attackers from resurfacing after extended periods.
-
-Trust cannot be restored once permanently revoked due to fraud.
-
-4. Consensus Security Guarantees
-
-4.1 Fairness and Byzantine Fault Tolerance
-
-Trust-weighted validation ensures that nodes with a proven track record have a higher influence.
-
-Fault tolerance is preserved as malicious nodes are gradually excluded from consensus.
-
-4.2 Peer Validation Model
-
-A transaction is validated if at least  of trusted peers approve.
-
-Fraud reports trigger an investigation requiring  consensus for trust revocation.
-
-5. Incentive Structures & Game Theory
-
-5.1 Rewarding Contributions
-
-More effort leads to higher trust and validation privileges.
-
-Nodes contributing without immediate returns gain trust exponentially.
-
-5.2 Penalties for Malicious Behavior
-
-Fraudulent actions lead to an irreversible trust drop to zero.
-
-A banned node can only re-enter the network through 51% peer approval, achieved through verifiable contributions.
-
-5.3 Preventing Artificial Inflation
-
-Contributions must be verifiable and peer-audited.
-
-Automated systems may cross-check anomalies, but peer validation remains primary.
-
-6. Conclusion
+## 6. Conclusion
 
 Proof-of-Trust offers a self-regulating, trust-driven consensus mechanism resistant to fraud, Sybil attacks, and collusion. Trust decays naturally, recovers based on merit, and is permanently lost in cases of malicious behavior. The model balances fairness, security, and sustainability, fostering an efficient and decentralized trust-based economy.
-
 
